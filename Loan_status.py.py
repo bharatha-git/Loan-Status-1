@@ -24,12 +24,9 @@ import seaborn as sns
 uploaded = files.upload()
 
 df = pd.read_csv(io.BytesIO(uploaded['Bank loan data.csv']))
-df
-
 df.head()
 
 data = df.drop(['Loan_ID','CoapplicantIncome','Married','Dependents','LoanAmount','Loan_Amount_Term','Property_Area'] , axis=1)
-
 data.head()
 
 #X = data.iloc[:,:-1]    # (Loan_ID,	Gender,	Education,	Self_Employed,	ApplicantIncome,	Credit_History,	Property_Area,	Loan_Status)
@@ -51,17 +48,9 @@ for i in data_col:
 
 
 
-#data.drop(['Property_Area'], axis=1, inplace=True)
-
-
-data
-
-
-
 
 
 X = data.iloc[:,:-1].values   # (	Gender,	Education,	Self_Employed,	ApplicantIncome,	Credit_History)
-
 y = data.iloc[:,-1].values   # Loan Status
 
 
@@ -72,8 +61,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.20)
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
-
-X_test
 
 
 
@@ -89,35 +76,7 @@ sns.pairplot(data)
 X_TRAIN = np.array(X_train).reshape(1,-1)
 Y_TRAIN = np.array(y_train).reshape(1,-1)
 X_TEST = np.array(X_test).reshape(1,-1)
-Y_TEST = np.array(y_test).reshape(1,-1)
-
-Y_TEST
-
-''' SVM  
-from sklearn.svm import SVC
-
-X_TRAIN = np.array(X_train).reshape(1,-1)
-Y_TRAIN = np.array(y_train).reshape(-1,1)
-X_TEST = np.array(X_test).reshape(-1,1)
-Y_TEST = np.array(y_test).reshape(-1,1)
-
-classifier = SVC(kernel='linear')
-classifier.fit(X_train, Y_TRAIN)
-y_pred = classifier.predict(X_test)
-
-print('Confusion Matrix\n {}\n\n'.format(confusion_matrix(Y_TEST,y_pred)))
-print('Classification Report \n {}\n\n'.format(classification_report(Y_TEST,y_pred)))
-print('SVC Accuracy - \t {}\n'.format(classifier.score(X_test, Y_TEST)))
-
-classifier.predict(X_test)
-
-classifier.predict([[ 4.54299688e-01,  1.85024956e+00, -3.80160683e-01,
-        -2.51883331e-01,  4.07763147e-01]])
-
-classifier.predict([[ 4.54299688e-01,  1.85024956e+00, -3.80160683e-01,
-        -6.19638466e-01, -2.45240407e+00],])
-
-'''
+Y_TEST = np.array(y_test).reshape(1,-
 
 
 ''' Random Forest Classifier '''
@@ -136,3 +95,9 @@ print('Classification Report \n {}\n\n'.format(classification_report(Y_TEST,y_pr
 print('Random Forest Accuracy - \t {}\n'.format(classifier.score(X_test, Y_TEST)))
 
 
+                                  
+                                  
+ ''' For Predicting the output '''
+                                  
+classifier.predict(X_test)
+                                 
